@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kumanga — AI Manga Harness</title>
+<meta name="description" content="Kumanga is an open-source, local-first AI manga harness. AI creates the assets. Humans direct the story. The creator remains the author. Back the launch and shape the future of AI manga creation.">
+<meta property="og:title" content="Kumanga — AI Manga Harness">
+<meta property="og:description" content="AI creates the assets. Humans direct the story. The creator remains the author. Open source, local-first, bring-your-own-key. Support the launch.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://kumanga-website-personal-b90d.vercel.app/assets/kumanga-poster.jpg">
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M 25 14 C 40.12 14 46 19.46 46 33.5 C 46 47.54 40.12 53 25 53 C 9.88 53 4 47.54 4 33.5 C 4 19.46 9.88 14 25 14 Z" fill="%23ff3ec8"/><circle cx="12.2" cy="15.4" r="8.7" fill="%23ff3ec8"/><circle cx="37.8" cy="15.4" r="8.7" fill="%23ff3ec8"/><ellipse cx="17.6" cy="29.5" rx="3.1" ry="4.1" fill="%23050507"/><ellipse cx="32.4" cy="29.5" rx="3.1" ry="4.1" fill="%23050507"/><ellipse cx="25" cy="41.5" rx="9.4" ry="6.6" fill="%23050507"/><ellipse cx="25" cy="38.9" rx="3.3" ry="2.5" fill="%23ff3ec8"/></svg>'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050507; --bg2:#0b0b12; --panel:#101018; --line:#232334;
+  --text:#f2f2f8; --muted:#a3a3ba; --dim:#6f6f88;
+  --pink:#ff3ec8; --pink-soft:#ff7ade;
+  --cyan:#2ad8ff; --blue:#4d7dff;
+  --amber:#ffb02e; --amber-soft:#ffd36e;
+  --violet:#a78bfa;
+  --radius:18px;
+  --font-head:"Baloo 2",system-ui,sans-serif;
+  --font-body:"Inter",system-ui,sans-serif;
+  --font-script:"Caveat",cursive;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:var(--font-body); font-size:16px; line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:rgba(255,62,200,.35)}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--font-head);line-height:1.12}
+.glow-pink{color:var(--pink);text-shadow:0 0 6px rgba(255,62,200,.85),0 0 22px rgba(255,62,200,.55),0 0 60px rgba(255,62,200,.35)}
+.glow-cyan{color:var(--cyan);text-shadow:0 0 6px rgba(42,216,255,.85),0 0 22px rgba(42,216,255,.5),0 0 60px rgba(42,216,255,.3)}
+.glow-amber{color:var(--amber);text-shadow:0 0 6px rgba(255,176,46,.85),0 0 22px rgba(255,176,46,.5),0 0 60px rgba(255,176,46,.3)}
+.glow-violet{color:var(--violet);text-shadow:0 0 6px rgba(167,139,250,.8),0 0 22px rgba(167,139,250,.5)}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(5,5,7,.78);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav-inner{display:flex;align-items:center;gap:28px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:800;font-size:1.25rem;text-decoration:none}
+.brand svg{width:34px;height:34px;filter:drop-shadow(0 0 8px rgba(255,62,200,.7))}
+.nav-links{display:flex;gap:22px;margin-left:auto;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-head);font-weight:700;text-decoration:none;
+  border-radius:999px;padding:12px 26px;font-size:1rem;
+  transition:transform .15s, box-shadow .2s, background .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-pink{
+  background:linear-gradient(135deg,#ff3ec8,#b939ff);color:#fff;
+  box-shadow:0 0 18px rgba(255,62,200,.45),0 4px 24px rgba(185,57,255,.35);
+}
+.btn-pink:hover{box-shadow:0 0 28px rgba(255,62,200,.65),0 6px 30px rgba(185,57,255,.5)}
+.btn-ghost{
+  border:1px solid rgba(42,216,255,.55);color:var(--cyan);
+  box-shadow:inset 0 0 12px rgba(42,216,255,.12),0 0 14px rgba(42,216,255,.18);
+}
+.btn-ghost:hover{background:rgba(42,216,255,.08)}
+.btn-small{padding:8px 18px;font-size:.9rem}
+
+/* ---------- hero ---------- */
+header.hero{
+  position:relative;padding:90px 0 40px;text-align:center;
+  background:
+    radial-gradient(1200px 500px at 50% -10%,rgba(185,57,255,.16),transparent 65%),
+    radial-gradient(700px 400px at 12% 22%,rgba(255,62,200,.10),transparent 60%),
+    radial-gradient(700px 400px at 88% 25%,rgba(42,216,255,.10),transparent 60%);
+}
+.hero-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.chip{
+  font-size:.78rem;font-weight:600;letter-spacing:.06em;
+  border-radius:999px;padding:6px 14px;border:1px solid;
+}
+.chip.pink{color:var(--pink-soft);border-color:rgba(255,62,200,.45);background:rgba(255,62,200,.07)}
+.chip.cyan{color:var(--cyan);border-color:rgba(42,216,255,.45);background:rgba(42,216,255,.07)}
+.chip.amber{color:var(--amber-soft);border-color:rgba(255,176,46,.45);background:rgba(255,176,46,.07)}
+.hero-bear{width:150px;margin:0 auto 14px;filter:drop-shadow(0 0 26px rgba(255,62,200,.55)) drop-shadow(0 0 70px rgba(185,57,255,.3));animation:bob 5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.hero h1{font-size:clamp(3rem,8vw,5.6rem);font-weight:800;letter-spacing:-.01em}
+.hero .sub-title{
+  font-family:var(--font-head);font-weight:700;
+  font-size:clamp(1.4rem,3.4vw,2.2rem);margin-top:2px;
+}
+.script-note{
+  font-family:var(--font-script);font-weight:700;
+  font-size:clamp(1.5rem,3vw,2rem);color:var(--amber-soft);
+  text-shadow:0 0 10px rgba(255,176,46,.6),0 0 30px rgba(255,176,46,.35);
+  transform:rotate(-3deg);display:inline-block;margin:18px 0 6px;
+}
+.manifesto{
+  font-family:var(--font-head);font-weight:600;
+  font-size:clamp(1.15rem,2.6vw,1.6rem);line-height:1.5;
+  max-width:720px;margin:18px auto 8px;color:var(--text);
+}
+.hero p.lede{color:var(--muted);max-width:640px;margin:14px auto 0;font-size:1.05rem}
+.hero-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+
+/* poster */
+.poster{
+  margin:64px auto 0;max-width:1020px;position:relative;border-radius:22px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 0 0 1px rgba(255,62,200,.15),0 0 60px rgba(185,57,255,.25),0 30px 80px rgba(0,0,0,.6);
+}
+.poster img{width:100%}
+.poster-caption{color:var(--dim);font-size:.85rem;margin-top:14px}
+
+/* ---------- sections ---------- */
+section{padding:96px 0;position:relative}
+.kicker{
+  font-size:.8rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  margin-bottom:14px;display:block;
+}
+h2.section-title{font-size:clamp(2rem,4.6vw,3rem);font-weight:800;margin-bottom:16px}
+.section-sub{color:var(--muted);max-width:680px;font-size:1.05rem}
+.center{text-align:center}
+.center .section-sub{margin:0 auto}
+
+/* philosophy */
+.philosophy{
+  background:
+    radial-gradient(800px 400px at 50% 50%,rgba(42,216,255,.07),transparent 70%);
+  text-align:center;
+}
+.philosophy .big{
+  font-family:var(--font-head);font-weight:800;
+  font-size:clamp(1.8rem,4.5vw,3rem);line-height:1.35;max-width:900px;margin:0 auto;
+}
+.philosophy .small{color:var(--muted);max-width:700px;margin:26px auto 0;font-size:1.05rem}
+
+/* features */
+.grid{display:grid;gap:22px;margin-top:52px}
+.grid.cols-3{grid-template-columns:repeat(3,1fr)}
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.012));
+  border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.card:hover{transform:translateY(-4px)}
+.card.pink:hover{border-color:rgba(255,62,200,.5);box-shadow:0 0 30px rgba(255,62,200,.15)}
+.card.cyan:hover{border-color:rgba(42,216,255,.5);box-shadow:0 0 30px rgba(42,216,255,.15)}
+.card.amber:hover{border-color:rgba(255,176,46,.5);box-shadow:0 0 30px rgba(255,176,46,.15)}
+.card.violet:hover{border-color:rgba(167,139,250,.5);box-shadow:0 0 30px rgba(167,139,250,.15)}
+.card .icon{
+  width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;border:1px solid;
+}
+.card.pink .icon{border-color:rgba(255,62,200,.5);background:rgba(255,62,200,.08);box-shadow:0 0 16px rgba(255,62,200,.25)}
+.card.cyan .icon{border-color:rgba(42,216,255,.5);background:rgba(42,216,255,.08);box-shadow:0 0 16px rgba(42,216,255,.25)}
+.card.amber .icon{border-color:rgba(255,176,46,.5);background:rgba(255,176,46,.08);box-shadow:0 0 16px rgba(255,176,46,.25)}
+.card.violet .icon{border-color:rgba(167,139,250,.5);background:rgba(167,139,250,.08);box-shadow:0 0 16px rgba(167,139,250,.25)}
+.card .icon svg{width:26px;height:26px}
+.card h3{font-size:1.28rem;font-weight:700;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.95rem}
+
+/* pipeline */
+.pipeline{background:radial-gradient(900px 500px at 80% 0%,rgba(255,62,200,.06),transparent 65%)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:52px;counter-reset:step}
+.step{
+  border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  position:relative;
+}
+.step .num{
+  font-family:var(--font-head);font-weight:800;font-size:.9rem;
+  width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px;color:#fff;
+  background:linear-gradient(135deg,#ff3ec8,#b939ff);
+  box-shadow:0 0 14px rgba(255,62,200,.5);
+}
+.step h3{font-size:1.08rem;margin-bottom:6px}
+.step p{color:var(--muted);font-size:.9rem}
+.step:not(:last-child)::after{
+  content:"→";position:absolute;right:-15px;top:50%;transform:translateY(-50%);
+  color:var(--pink);font-size:1.2rem;text-shadow:0 0 10px rgba(255,62,200,.7);z-index:2;
+}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:52px}
+.stat{
+  text-align:center;border:1px solid var(--line);border-radius:var(--radius);padding:30px 16px;
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+}
+.stat .n{font-family:var(--font-head);font-weight:800;font-size:2.4rem;line-height:1.1}
+.stat .l{color:var(--muted);font-size:.88rem;margin-top:8px}
+
+/* roadmap */
+.roadmap-cols{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:52px}
+.road{
+  border-radius:var(--radius);padding:34px 30px;border:1px solid;
+}
+.road.now{border-color:rgba(42,216,255,.4);background:rgba(42,216,255,.05);box-shadow:0 0 40px rgba(42,216,255,.08)}
+.road.next{border-color:rgba(255,62,200,.4);background:rgba(255,62,200,.05);box-shadow:0 0 40px rgba(255,62,200,.08)}
+.road h3{font-size:1.4rem;margin-bottom:6px}
+.road .tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:12px}
+.road ul{list-style:none;margin-top:16px}
+.road li{
+  padding:9px 0 9px 30px;position:relative;color:var(--muted);font-size:.95rem;
+  border-bottom:1px dashed rgba(255,255,255,.07);
+}
+.road li:last-child{border-bottom:none}
+.road.now li::before{content:"✓";position:absolute;left:2px;color:var(--cyan);font-weight:700;text-shadow:0 0 8px rgba(42,216,255,.7)}
+.road.next li::before{content:"★";position:absolute;left:0;color:var(--pink);text-shadow:0 0 8px rgba(255,62,200,.7)}
+
+/* support */
+.support{
+  background:
+    radial-gradient(900px 500px at 50% 100%,rgba(185,57,255,.14),transparent 70%),
+    radial-gradient(600px 300px at 20% 20%,rgba(255,62,200,.08),transparent 60%);
+  text-align:center;
+}
+.support-box{
+  max-width:860px;margin:0 auto;border-radius:26px;padding:64px 44px;
+  border:1px solid rgba(255,62,200,.5);
+  background:linear-gradient(180deg,rgba(255,62,200,.06),rgba(185,57,255,.04));
+  box-shadow:0 0 50px rgba(255,62,200,.18),inset 0 0 60px rgba(185,57,255,.06);
+}
+.support-box h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:800}
+.support-box p{color:var(--muted);max-width:600px;margin:18px auto 0;font-size:1.05rem}
+.support-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.platforms{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px;color:var(--dim);font-size:.85rem;align-items:center}
+.platforms span.p{
+  border:1px solid var(--line);border-radius:999px;padding:6px 16px;color:var(--muted);font-weight:600;
+}
+
+/* community strip */
+.strip{
+  display:flex;gap:26px;justify-content:center;align-items:center;flex-wrap:wrap;
+  margin-top:64px;
+}
+.strip .love{
+  border:1px solid rgba(255,62,200,.45);border-radius:18px;padding:22px 30px;
+  font-family:var(--font-head);font-weight:700;font-size:1.05rem;line-height:1.5;text-align:left;
+  box-shadow:0 0 24px rgba(255,62,200,.15);
+}
+.strip .love .os{color:var(--cyan)}
+
+/* footer */
+footer{border-top:1px solid rgba(255,255,255,.07);padding:44px 0 60px;color:var(--dim);font-size:.88rem}
+.foot-inner{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot-brand{display:flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:700;color:var(--muted)}
+.foot-brand svg{width:26px;height:26px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--text)}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap}
+
+/* responsive */
+@media(max-width:960px){
+  .grid.cols-3{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:not(:last-child)::after{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .roadmap-cols{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .grid.cols-3{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .nav-links a:not(.btn){display:none}
+  section{padding:70px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= NAV ======================= -->
+<nav>
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bear-mark"/></svg>
+      <span>Ku<span class="glow-pink">manga</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="https://github.com/BotTony329/mangaharness" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-pink btn-small" href="#support">Back the launch</a>
+    </div>
+  </div>
+</nav>
+
+<!-- shared bear mark (official Kumanga mark, neon-tinted) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="bearGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff7ade"/>
+      <stop offset="55%" stop-color="#ff3ec8"/>
+      <stop offset="100%" stop-color="#b939ff"/>
+    </linearGradient>
+    <mask id="km-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <path d="M 25 14 C 40.12 14 46 19.46 46 33.5 C 46 47.54 40.12 53 25 53 C 9.88 53 4 47.54 4 33.5 C 4 19.46 9.88 14 25 14 Z" fill="#fff"/>
+      <circle cx="12.2" cy="15.4" r="8.7" fill="#fff"/>
+      <circle cx="37.8" cy="15.4" r="8.7" fill="#fff"/>
+      <ellipse cx="17.6" cy="29.5" rx="3.1" ry="4.1" fill="#000"/>
+      <ellipse cx="32.4" cy="29.5" rx="3.1" ry="4.1" fill="#000"/>
+      <ellipse cx="25" cy="41.5" rx="9.4" ry="6.6" fill="#000"/>
+      <ellipse cx="25" cy="38.9" rx="3.3" ry="2.5" fill="#fff"/>
+      <g fill="#000" stroke="#000" stroke-width="5.4" stroke-linejoin="round">
+        <path d="M 43 32.5 H 55 A 5 5 0 0 1 60 37.5 V 45.5 A 5 5 0 0 1 55 50.5 H 43 A 5 5 0 0 1 38 45.5 V 37.5 A 5 5 0 0 1 43 32.5 Z"/>
+        <path d="M 42.6 47 L 38.4 57.4 L 49.4 50.4 Z"/>
+      </g>
+      <path d="M 43 32.5 H 55 A 5 5 0 0 1 60 37.5 V 45.5 A 5 5 0 0 1 55 50.5 H 43 A 5 5 0 0 1 38 45.5 V 37.5 A 5 5 0 0 1 43 32.5 Z" fill="#fff"/>
+      <path d="M 42.6 47 L 38.4 57.4 L 49.4 50.4 Z" fill="#fff"/>
+      <path d="M 44.2 36.4 H 53.8 A 2.6 2.6 0 0 1 56.4 39 V 44 A 2.6 2.6 0 0 1 53.8 46.6 H 44.2 A 2.6 2.6 0 0 1 41.6 44 V 39 A 2.6 2.6 0 0 1 44.2 36.4 Z" fill="#000"/>
+    </mask>
+    <g id="bear-mark">
+      <rect width="64" height="64" fill="url(#bearGrad)" mask="url(#km-mask)"/>
+    </g>
+  </defs>
+</svg>
+
+<!-- ======================= HERO ======================= -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-badges">
+      <span class="chip cyan">OPEN SOURCE</span>
+      <span class="chip pink">LOCAL-FIRST</span>
+      <span class="chip amber">BRING YOUR OWN KEY</span>
+    </div>
+
+    <svg class="hero-bear" viewBox="0 0 64 64" aria-label="Kumanga bear mark"><use href="#bear-mark"/></svg>
+
+    <h1><span class="glow-pink">Ku</span><span class="glow-cyan">manga</span></h1>
+    <div class="sub-title"><span class="glow-amber">The AI Manga Harness</span></div>
+
+    <div><span class="script-note">developed, under final testing ~</span></div>
+
+    <p class="manifesto">
+      AI creates the <span class="glow-pink">assets</span>.
+      Humans direct the <span class="glow-cyan">story</span>.
+      The creator remains the <span class="glow-amber">author</span>.
+    </p>
+
+    <p class="lede">
+      A manga studio that runs entirely on your machine — reusable characters, polygon
+      panels, tones, dialogue and a natural-language Manga Agent. No account. No
+      subscription. Your API keys, your projects, your pages.
+    </p>
+
+    <div class="hero-cta">
+      <a class="btn btn-pink" href="#support">★ Support the launch</a>
+      <a class="btn btn-ghost" href="https://mangaharness.vercel.app" target="_blank" rel="noopener">Try the live studio</a>
+    </div>
+
+    <figure class="poster">
+      <img src="assets/kumanga-poster.jpg" alt="Kumanga studio poster — the bear mascot behind a laptop running the manga editor, with the feature list: reusable characters, scene and asset library, manga editor, manga agent, export and share" loading="eager" onerror="this.closest('figure').style.display='none';document.querySelector('.poster-caption').style.display='none'">
+    </figure>
+    <p class="poster-caption">The Kumanga studio: project library, manga assets, the page canvas and the Manga Agent — one editor.</p>
+  </div>
+</header>
+
+<!-- ======================= PHILOSOPHY ======================= -->
+<section class="philosophy">
+  <div class="wrap">
+    <span class="kicker glow-cyan">WHY KUMANGA EXISTS</span>
+    <p class="big">
+      Most AI comics tools generate a finished page and leave you no way to change it.
+      Kumanga generates <span class="glow-pink">reusable assets</span> — characters, poses,
+      expressions, backgrounds — and gives you a real
+      <span class="glow-cyan">non-destructive editor</span> to compose them into pages
+      <span class="glow-amber">you control</span>.
+    </p>
+    <p class="small">
+      Move a character without regenerating the panel. Reframe a full-body asset into a
+      close-up with zero new generations. Rewrite one line of dialogue without touching
+      the art. That's what a harness is: the AI is powerful, and you hold the reins.
+    </p>
+  </div>
+</section>
+
+<!-- ======================= FEATURES ======================= -->
+<section id="features">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker glow-pink">WHAT'S INSIDE</span>
+      <h2 class="section-title">A complete studio, not a prompt box</h2>
+      <p class="section-sub">Everything below is already built and running in the v0.1 open-source preview.</p>
+    </div>
+
+    <div class="grid cols-3">
+      <div class="card pink">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ff3ec8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></div>
+        <h3>Reusable Characters</h3>
+        <p>Create a character once, use them across every panel. Structured pose &amp; expression libraries, reference-aware generation, and semantic slot switching keep them consistent page after page.</p>
+      </div>
+      <div class="card cyan">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2ad8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-7 4 5 3-4 6 6"/><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8" cy="9" r="1.4"/></svg></div>
+        <h3>Scene &amp; Asset Library</h3>
+        <p>Backgrounds, props, uploads, screentones, speed lines, focus lines and impact bursts — all organized, all drag-to-panel, all yours to reuse in any project.</p>
+      </div>
+      <div class="card amber">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ffb02e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 12h9M12 3v9M12 12l9 9"/></svg></div>
+        <h3>Manga Editor</h3>
+        <p>An infinite canvas with polygon panels you can reshape vertex by vertex, classic layouts (including yonkoma), viewport framing from full-body to close-up, and full undo/redo.</p>
+      </div>
+      <div class="card violet">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><circle cx="9.5" cy="13" r="1.3"/><circle cx="14.5" cy="13" r="1.3"/><path d="M12 7V4M8 4h8"/></svg></div>
+        <h3>Manga Agent</h3>
+        <p>Tell it what you want in plain language — "make them blush in panel 2" — and it plans, reuses what exists, generates only what's missing, and commits a verified, fully editable result.</p>
+      </div>
+      <div class="card cyan">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#2ad8ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Local-First &amp; BYOK</h3>
+        <p>Projects and images live on your machine, not our cloud. Connect any compatible AI provider with your own key — Gemini, OpenAI-compatible, or a custom endpoint. No account, ever.</p>
+      </div>
+      <div class="card pink">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="#ff3ec8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M12 3l-4 4M12 3l4 4"/><path d="M4 14v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg></div>
+        <h3>Export &amp; Share</h3>
+        <p>High-quality PNG export straight from the live scene graph at 1× or 2×, with provenance metadata on every generated asset. Your pages leave the studio ready to publish.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= HOW IT WORKS ======================= -->
+<section class="pipeline" id="how">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker glow-amber">HOW THE HARNESS WORKS</span>
+      <h2 class="section-title">Natural language in, an editable page out</h2>
+      <p class="section-sub">The Manga Agent treats the AI as a creative director — but code owns the state, the identity of every asset, and the final commit. Nothing lands on your page unverified.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>You direct</h3>
+        <p>Describe the scene, the shot, the mood, the dialogue — in your own words. Your exact wording is locked as evidence before any AI sees it.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>The agent plans</h3>
+        <p>A single creative-director pass maps your intent to cameras, interactions and bubbles — validated against a strict contract, never guessed IDs.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Reuse before generate</h3>
+        <p>Existing characters and assets are reused or transformed first; new images are generated only for what's genuinely missing. Your tokens are respected.</p>
+      </div>
+      <div class="step">
+        <div class="num">4</div>
+        <h3>Verified commit</h3>
+        <p>A deterministic verifier checks every actor is placed and dialogue is byte-exact before committing. The run lands whole — or rolls back cleanly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BY THE NUMBERS ======================= -->
+<section>
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker glow-cyan">BUILT PROPERLY</span>
+      <h2 class="section-title">v0.1 is frozen, tested and live</h2>
+      <p class="section-sub">This isn't a concept video. The open-source preview is running in production today — backing accelerates what comes next.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n glow-pink">991</div><div class="l">automated tests passing</div></div>
+      <div class="stat"><div class="n glow-cyan">0</div><div class="l">npm vulnerabilities</div></div>
+      <div class="stat"><div class="n glow-amber">98</div><div class="l">dedicated security tests</div></div>
+      <div class="stat"><div class="n glow-violet">0</div><div class="l">accounts, sign-ups or lock-in</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= ROADMAP ======================= -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker glow-pink">WHERE YOUR BACKING GOES</span>
+      <h2 class="section-title">Shipped today → unlocked by you</h2>
+      <p class="section-sub">The v0.1 foundation is done. Crowdfunding pays for the features creators ask for most.</p>
+    </div>
+
+    <div class="roadmap-cols">
+      <div class="road now">
+        <span class="tag glow-cyan">✓ Shipped in v0.1 — free &amp; open source</span>
+        <h3>The working studio</h3>
+        <ul>
+          <li>Infinite workspace canvas with polygon panels &amp; classic layouts</li>
+          <li>Reusable characters with pose / expression libraries</li>
+          <li>Viewport framing: one asset, every shot distance — zero regenerations</li>
+          <li>Speech, thought &amp; shout bubbles, narration, tones and effects</li>
+          <li>Manga Agent with verified, rollback-safe runs</li>
+          <li>BYOK providers (Gemini, OpenAI-compatible, custom endpoints)</li>
+          <li>PNG export with provenance metadata</li>
+        </ul>
+      </div>
+      <div class="road next">
+        <span class="tag glow-pink">★ Next — funded by the campaign</span>
+        <h3>What backers unlock</h3>
+        <ul>
+          <li>PDF, webtoon-strip and print-ready export</li>
+          <li>Multi-project management &amp; project archive import/export</li>
+          <li>Custom panel drawing, split &amp; merge</li>
+          <li>Advanced typography &amp; layer effects</li>
+          <li>Long-form story tools and richer agent orchestration</li>
+          <li>Collaboration and shared asset libraries</li>
+          <li>Mobile &amp; tablet support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SUPPORT ======================= -->
+<section class="support" id="support">
+  <div class="wrap">
+    <div class="support-box">
+      <h2><span class="glow-pink">Support the launch.</span><br>Shape the future of <span class="glow-cyan">AI manga creation</span>.</h2>
+      <p>
+        Kumanga is independent and open source — no VC, no ad model, no data harvesting.
+        The crowdfunding campaign is being prepared now. Star the repo to follow along,
+        and be first in line when the campaign goes live.
+      </p>
+      <div class="support-cta">
+        <a class="btn btn-pink" href="https://github.com/BotTony329/mangaharness" target="_blank" rel="noopener">★ Star on GitHub — get notified</a>
+        <a class="btn btn-ghost" href="https://mangaharness.vercel.app" target="_blank" rel="noopener">Try it before you back it</a>
+      </div>
+      <div class="platforms">
+        <span>Campaign coming to</span>
+        <span class="p">Kickstarter</span>
+        <span class="p">Indiegogo</span>
+      </div>
+    </div>
+
+    <div class="strip">
+      <div class="love">
+        ♥ Built with passion.<br>
+        Powered by community.<br>
+        <span class="os">Open source.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FOOTER ======================= -->
+<footer>
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#bear-mark"/></svg>
+      <span>Kumanga — AI Manga Studio</span>
+    </div>
+    <div class="foot-links">
+      <a href="https://github.com/BotTony329/mangaharness" target="_blank" rel="noopener">Source code</a>
+      <a href="https://mangaharness.vercel.app" target="_blank" rel="noopener">Live studio</a>
+      <a href="https://github.com/BotTony329" target="_blank" rel="noopener">BotTony329</a>
+    </div>
+    <div>Created and maintained by <a href="https://github.com/BotTony329" target="_blank" rel="noopener">BotTony329</a>. Kuma (bear) + manga.</div>
+  </div>
+</footer>
+
+</body>
+</html>
