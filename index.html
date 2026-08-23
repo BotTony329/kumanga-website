@@ -190,6 +190,27 @@ h2.section-title{font-size:clamp(2rem,4.6vw,3rem);font-weight:800;margin-bottom:
   color:var(--pink);font-size:1.2rem;text-shadow:0 0 10px rgba(255,62,200,.7);z-index:2;
 }
 
+/* demo videos & manga gallery */
+.videos{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:52px}
+.video-card{
+  border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  transition:border-color .2s, box-shadow .2s;
+}
+.video-card:hover{border-color:rgba(42,216,255,.5);box-shadow:0 0 30px rgba(42,216,255,.15)}
+.video-card .frame{position:relative;width:100%;aspect-ratio:16/9;background:#000}
+.video-card iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-card .v-title{padding:16px 20px;font-family:var(--font-head);font-weight:700;font-size:1.05rem}
+.video-card .v-sub{padding:0 20px 18px;color:var(--muted);font-size:.9rem}
+.manga-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.manga-page{
+  display:block;border-radius:14px;overflow:hidden;border:1px solid var(--line);
+  background:#fff;transition:transform .2s,border-color .2s,box-shadow .2s;
+}
+.manga-page:hover{transform:translateY(-5px);border-color:rgba(255,62,200,.55);box-shadow:0 0 34px rgba(255,62,200,.22)}
+.manga-page img{width:100%}
+.gallery-caption{color:var(--dim);font-size:.85rem;margin-top:18px;text-align:center}
+
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:52px}
 .stat{
@@ -262,6 +283,8 @@ footer a:hover{color:var(--text)}
 /* responsive */
 @media(max-width:960px){
   .grid.cols-3{grid-template-columns:1fr 1fr}
+  .videos{grid-template-columns:1fr}
+  .manga-gallery{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}
   .steps{grid-template-columns:1fr 1fr}
   .step:not(:last-child)::after{display:none}
   .stats{grid-template-columns:1fr 1fr}
@@ -287,6 +310,7 @@ footer a:hover{color:var(--text)}
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
+      <a href="#demo">Demo</a>
       <a href="#roadmap">Roadmap</a>
       <a href="https://github.com/BotTony329/mangaharness" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-pink btn-small" href="#support">Back the launch</a>
@@ -461,6 +485,53 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
+<!-- ======================= DEMO: VIDEOS + MANGA ======================= -->
+<section id="demo">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker glow-cyan">SEE IT IN ACTION</span>
+      <h2 class="section-title">Watch the harness work</h2>
+      <p class="section-sub">Two systems that make Kumanga different — recorded straight from the studio.</p>
+    </div>
+
+    <div class="videos">
+      <div class="video-card">
+        <div class="frame">
+          <iframe src="https://www.youtube.com/embed/t0AOxLiDGxA" title="Kumanga demo — character relation system" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="v-title"><span class="glow-pink">Character relation system</span></div>
+        <div class="v-sub">Define how characters relate to each other once — then generate interaction poses (a hug, a hand on a shoulder, a face-off) that respect the relationship, without character drift.</div>
+      </div>
+      <div class="video-card">
+        <div class="frame">
+          <iframe src="https://www.youtube.com/embed/O1h57FN3uns" title="Kumanga demo — all elements are assets" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="v-title"><span class="glow-cyan">All elements are assets</span></div>
+        <div class="v-sub">Characters, backgrounds, props, bubbles, effects — everything on the page is a reusable asset you can move, reframe, swap and reuse across panels and projects.</div>
+      </div>
+    </div>
+
+    <div class="center" style="margin-top:80px">
+      <span class="kicker glow-pink">MADE WITH KUMANGA</span>
+      <h2 class="section-title">Meet Kumanga-chan</h2>
+      <p class="section-sub">Three demo pages composed in the studio — same characters, page after page, scene after scene. Click any page to read it full size.</p>
+    </div>
+
+    <div class="manga-gallery">
+      <a class="manga-page" href="assets/manga-page-1.jpg" target="_blank" rel="noopener">
+        <img src="assets/manga-page-1.jpg" alt="Demo manga page 1 — Kumanga-chan introduces herself as an open-source AI manga harness built by Tony" loading="lazy" onerror="this.closest('a').style.display='none'">
+      </a>
+      <a class="manga-page" href="assets/manga-page-2.jpg" target="_blank" rel="noopener">
+        <img src="assets/manga-page-2.jpg" alt="Demo manga page 2 — Kumanga-chan and Maku-chan demonstrate the relationship system and local-first BYOK setup" loading="lazy" onerror="this.closest('a').style.display='none'">
+      </a>
+      <a class="manga-page" href="assets/manga-page-3.jpg" target="_blank" rel="noopener">
+        <img src="assets/manga-page-3.jpg" alt="Demo manga page 3 — Kumanga-chan thanks readers and shows the GoFundMe campaign for launching the AI manga harness" loading="lazy" onerror="this.closest('a').style.display='none'">
+      </a>
+    </div>
+    <p class="gallery-caption">Same two characters across every panel — poses, expressions and interactions generated as reusable assets, composed by hand.</p>
+  </div>
+</section>
+
 <!-- ======================= BY THE NUMBERS ======================= -->
 <section>
   <div class="wrap">
@@ -526,15 +597,18 @@ footer a:hover{color:var(--text)}
       <h2><span class="glow-pink">Support the launch.</span><br>Shape the future of <span class="glow-cyan">AI manga creation</span>.</h2>
       <p>
         Kumanga is independent and open source — no VC, no ad model, no data harvesting.
-        The crowdfunding campaign is being prepared now. Star the repo to follow along,
-        and be first in line when the campaign goes live.
+        Every contribution goes straight into building the features on the roadmap.
+        The fundraiser is live on GoFundMe right now.
       </p>
       <div class="support-cta">
-        <a class="btn btn-pink" href="https://github.com/BotTony329/mangaharness" target="_blank" rel="noopener">★ Star on GitHub — get notified</a>
+        <a class="btn btn-pink" href="https://gofund.me/91d807ee1" target="_blank" rel="noopener">♥ Donate on GoFundMe</a>
         <a class="btn btn-ghost" href="https://mangaharness.vercel.app" target="_blank" rel="noopener">Try it before you back it</a>
+        <a class="btn btn-ghost" href="https://github.com/BotTony329/mangaharness" target="_blank" rel="noopener">★ Star on GitHub</a>
       </div>
       <div class="platforms">
-        <span>Campaign coming to</span>
+        <span>Live on</span>
+        <span class="p">GoFundMe</span>
+        <span>· more platforms coming</span>
         <span class="p">Kickstarter</span>
         <span class="p">Indiegogo</span>
       </div>
