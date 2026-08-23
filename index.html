@@ -268,8 +268,17 @@ h2.section-title{font-size:clamp(2rem,4.6vw,3rem);font-weight:800;margin-bottom:
 .support-box p{color:var(--muted);max-width:600px;margin:18px auto 0;font-size:1.05rem}
 .support-cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px}
 .platforms{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px;color:var(--dim);font-size:.85rem;align-items:center}
-.platforms span.p{
+.platforms .p{
   border:1px solid var(--line);border-radius:999px;padding:6px 16px;color:var(--muted);font-weight:600;
+}
+.platforms a.p{text-decoration:none;transition:color .2s,border-color .2s,box-shadow .2s}
+.platforms a.p:hover{color:var(--cyan);border-color:rgba(42,216,255,.45);box-shadow:0 0 16px rgba(42,216,255,.15)}
+/* Campaign page exists but Kickstarter has not approved it yet, so it must not
+   read as a place you can back today — the amber tag is the honest signal. */
+.platforms .p.pending{border-color:rgba(255,176,46,.4)}
+.platforms .p.pending::after{
+  content:"under review";margin-left:9px;font-size:.68rem;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--amber-soft);
 }
 
 /* community strip */
@@ -611,7 +620,8 @@ footer a:hover{color:var(--text)}
       <p>
         Kumanga is independent and open source — no VC, no ad model, no data harvesting.
         Every contribution goes straight into building the features on the roadmap.
-        The fundraiser is live on GoFundMe right now.
+        The fundraiser is live on GoFundMe right now, and a Kickstarter campaign
+        is in review — it opens to backers once Kickstarter approves it.
       </p>
       <div class="support-cta">
         <a class="btn btn-pink" href="https://gofund.me/91d807ee1" target="_blank" rel="noopener">♥ Donate on GoFundMe</a>
@@ -622,7 +632,7 @@ footer a:hover{color:var(--text)}
         <span>Live on</span>
         <span class="p">GoFundMe</span>
         <span>· more platforms coming</span>
-        <span class="p">Kickstarter</span>
+        <a class="p pending" href="https://www.kickstarter.com/projects/1269444160/ai-manga-harness" target="_blank" rel="noopener">Kickstarter</a>
         <span class="p">Indiegogo</span>
       </div>
     </div>
