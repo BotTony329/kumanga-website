@@ -13,6 +13,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+/* If an image is missing on this deployment, retry from the GitHub repo copy; hide the block only if both fail. */
+function kmFb(el){
+  if(!el.dataset.f){
+    el.dataset.f='1';
+    el.src='https://raw.githubusercontent.com/BotTony329/kumanga-website/main/'+el.getAttribute('data-path');
+  }else{
+    var box=el.closest('figure,a');
+    if(box){box.style.display='none';}
+    if(el.closest('figure')){var c=document.querySelector('.poster-caption');if(c){c.style.display='none';}}
+  }
+}
+</script>
 <style>
 :root{
   --bg:#050507; --bg2:#0b0b12; --panel:#101018; --line:#232334;
@@ -382,7 +395,7 @@ footer a:hover{color:var(--text)}
     </div>
 
     <figure class="poster">
-      <img src="assets/kumanga-poster.jpg" alt="Kumanga studio poster — the bear mascot behind a laptop running the manga editor, with the feature list: reusable characters, scene and asset library, manga editor, manga agent, export and share" loading="eager" onerror="this.closest('figure').style.display='none';document.querySelector('.poster-caption').style.display='none'">
+      <img src="assets/kumanga-poster.jpg" alt="Kumanga studio poster — the bear mascot behind a laptop running the manga editor, with the feature list: reusable characters, scene and asset library, manga editor, manga agent, export and share" loading="eager" data-path="assets/kumanga-poster.jpg" onerror="kmFb(this)">
     </figure>
     <p class="poster-caption">The Kumanga studio: project library, manga assets, the page canvas and the Manga Agent — one editor.</p>
   </div>
@@ -519,13 +532,13 @@ footer a:hover{color:var(--text)}
 
     <div class="manga-gallery">
       <a class="manga-page" href="assets/manga-page-1.jpg" target="_blank" rel="noopener">
-        <img src="assets/manga-page-1.jpg" alt="Demo manga page 1 — Kumanga-chan introduces herself as an open-source AI manga harness built by Tony" loading="lazy" onerror="this.closest('a').style.display='none'">
+        <img src="assets/manga-page-1.jpg" data-path="assets/manga-page-1.jpg" alt="Demo manga page 1 — Kumanga-chan introduces herself as an open-source AI manga harness built by Tony" loading="lazy" onerror="kmFb(this)">
       </a>
       <a class="manga-page" href="assets/manga-page-2.jpg" target="_blank" rel="noopener">
-        <img src="assets/manga-page-2.jpg" alt="Demo manga page 2 — Kumanga-chan and Maku-chan demonstrate the relationship system and local-first BYOK setup" loading="lazy" onerror="this.closest('a').style.display='none'">
+        <img src="assets/manga-page-2.jpg" data-path="assets/manga-page-2.jpg" alt="Demo manga page 2 — Kumanga-chan and Maku-chan demonstrate the relationship system and local-first BYOK setup" loading="lazy" onerror="kmFb(this)">
       </a>
       <a class="manga-page" href="assets/manga-page-3.jpg" target="_blank" rel="noopener">
-        <img src="assets/manga-page-3.jpg" alt="Demo manga page 3 — Kumanga-chan thanks readers and shows the GoFundMe campaign for launching the AI manga harness" loading="lazy" onerror="this.closest('a').style.display='none'">
+        <img src="assets/manga-page-3.jpg" data-path="assets/manga-page-3.jpg" alt="Demo manga page 3 — Kumanga-chan thanks readers and shows the GoFundMe campaign for launching the AI manga harness" loading="lazy" onerror="kmFb(this)">
       </a>
     </div>
     <p class="gallery-caption">Same two characters across every panel — poses, expressions and interactions generated as reusable assets, composed by hand.</p>
