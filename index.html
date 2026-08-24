@@ -3,12 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kumanga — AI Manga Harness</title>
-<meta name="description" content="Kumanga is an open-source, local-first AI manga harness. AI creates the assets. Humans direct the story. The creator remains the author. Back the launch and shape the future of AI manga creation.">
-<meta property="og:title" content="Kumanga — AI Manga Harness">
-<meta property="og:description" content="AI creates the assets. Humans direct the story. The creator remains the author. Open source, local-first, bring-your-own-key. Support the launch.">
+<title>Kumanga — Open-Source AI Manga Creator &amp; Studio</title>
+<meta name="description" content="Kumanga is a free, open-source, local-first AI manga studio: reusable characters, an editable canvas and a Manga Agent you direct. No account, bring your own key.">
+<link rel="canonical" href="https://kumanga-website.vercel.app/">
+<meta name="theme-color" content="#050507">
+<meta property="og:site_name" content="Kumanga">
+<meta property="og:title" content="Kumanga — Open-Source AI Manga Creator & Studio">
+<meta property="og:description" content="AI creates the assets. Humans direct the story. The creator remains the author. Open source, local-first, bring-your-own-key.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://kumanga-website-personal-b90d.vercel.app/assets/kumanga-poster.jpg">
+<meta property="og:url" content="https://kumanga-website.vercel.app/">
+<meta property="og:image" content="https://kumanga-website.vercel.app/assets/kumanga-poster.jpg">
+<meta property="og:image:width" content="1300">
+<meta property="og:image:height" content="731">
+<meta property="og:image:alt" content="The Kumanga studio interface — project library, manga assets, page canvas and the Manga Agent">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kumanga — Open-Source AI Manga Creator & Studio">
+<meta name="twitter:description" content="A local-first AI manga harness: reusable characters, an editable canvas and a Manga Agent. No account, bring your own key.">
+<meta name="twitter:image" content="https://kumanga-website.vercel.app/assets/kumanga-poster.jpg">
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M 25 14 C 40.12 14 46 19.46 46 33.5 C 46 47.54 40.12 53 25 53 C 9.88 53 4 47.54 4 33.5 C 4 19.46 9.88 14 25 14 Z" fill="%23ff3ec8"/><circle cx="12.2" cy="15.4" r="8.7" fill="%23ff3ec8"/><circle cx="37.8" cy="15.4" r="8.7" fill="%23ff3ec8"/><ellipse cx="17.6" cy="29.5" rx="3.1" ry="4.1" fill="%23050507"/><ellipse cx="32.4" cy="29.5" rx="3.1" ry="4.1" fill="%23050507"/><ellipse cx="25" cy="41.5" rx="9.4" ry="6.6" fill="%23050507"/><ellipse cx="25" cy="38.9" rx="3.3" ry="2.5" fill="%23ff3ec8"/></svg>'>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -251,6 +262,17 @@ h2.section-title{font-size:clamp(2rem,4.6vw,3rem);font-weight:800;margin-bottom:
 .road.now li::before{content:"✓";position:absolute;left:2px;color:var(--cyan);font-weight:700;text-shadow:0 0 8px rgba(42,216,255,.7)}
 .road.next li::before{content:"★";position:absolute;left:0;color:var(--pink);text-shadow:0 0 8px rgba(255,62,200,.7)}
 
+/* faq */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:52px;text-align:left}
+.faq-item{
+  border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+  transition:border-color .2s
+}
+.faq-item:hover{border-color:rgba(255,176,46,.45)}
+.faq-item h3{font-size:1.12rem;margin-bottom:10px}
+.faq-item p{color:var(--muted);font-size:.95rem}
+
 /* support */
 .support{
   background:
@@ -311,6 +333,7 @@ footer a:hover{color:var(--text)}
   .step:not(:last-child)::after{display:none}
   .stats{grid-template-columns:1fr 1fr}
   .roadmap-cols{grid-template-columns:1fr}
+  .faq-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .grid.cols-3{grid-template-columns:1fr}
@@ -319,6 +342,146 @@ footer a:hover{color:var(--text)}
   section{padding:70px 0}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://kumanga-website.vercel.app/#org",
+      "name": "Kumanga",
+      "url": "https://kumanga-website.vercel.app/",
+      "description": "Kumanga is an independent, open-source project building a local-first AI manga harness. Kuma (bear) + manga.",
+      "founder": { "@type": "Person", "name": "BotTony329", "url": "https://github.com/BotTony329" },
+      "sameAs": [
+        "https://github.com/BotTony329/mangaharness",
+        "https://mangaharness.vercel.app"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://kumanga-website.vercel.app/#website",
+      "url": "https://kumanga-website.vercel.app/",
+      "name": "Kumanga",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://kumanga-website.vercel.app/#org" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Kumanga",
+      "alternateName": "Kumanga AI Manga Harness",
+      "applicationCategory": "DesignApplication",
+      "applicationSubCategory": "AI manga creation tool",
+      "operatingSystem": "Web browser",
+      "softwareVersion": "0.1",
+      "url": "https://kumanga-website.vercel.app/",
+      "screenshot": "https://kumanga-website.vercel.app/assets/kumanga-poster.jpg",
+      "description": "An open-source, local-first AI manga harness. AI creates reusable assets — characters, poses, expressions, backgrounds — and a non-destructive editor composes them into manga pages you control. Bring your own API key; no account required.",
+      "featureList": [
+        "Reusable characters with pose and expression libraries",
+        "Scene and asset library with screentones and effects",
+        "Manga editor with polygon panels and classic layouts",
+        "Natural-language Manga Agent with verified, rollback-safe runs",
+        "Local-first projects with bring-your-own-key AI providers",
+        "PNG export at 1x or 2x with provenance metadata"
+      ],
+      "isAccessibleForFree": true,
+      "license": "https://opensource.org/licenses/MIT",
+      "author": { "@id": "https://kumanga-website.vercel.app/#org" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Kumanga demo — character relation system",
+      "description": "Define how characters relate to each other once, then generate interaction poses that respect the relationship without character drift.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/t0AOxLiDGxA/hqdefault.jpg",
+      "uploadDate": "2026-08-23",
+      "embedUrl": "https://www.youtube.com/embed/t0AOxLiDGxA"
+    },
+    {
+      "@type": "VideoObject",
+      "name": "Kumanga demo — all elements are assets",
+      "description": "Characters, backgrounds, props, bubbles and effects — everything on the page is a reusable asset you can move, reframe, swap and reuse.",
+      "thumbnailUrl": "https://i.ytimg.com/vi/O1h57FN3uns/hqdefault.jpg",
+      "uploadDate": "2026-08-23",
+      "embedUrl": "https://www.youtube.com/embed/O1h57FN3uns"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Kumanga?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kumanga is an open-source, local-first AI manga harness — a complete manga studio that runs in your browser. AI generates reusable assets such as characters, poses and backgrounds, while you direct the story in a non-destructive editor. The creator remains the author: your API keys, your projects, your pages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Kumanga free and open source?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Kumanga v0.1 is free and open source under the MIT license, and the preview is running today. A GoFundMe fundraiser is live and a Kickstarter campaign is in review to fund the next features — the core studio stays free."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need an account or subscription?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kumanga has zero accounts, sign-ups or lock-in. Projects and images live on your machine, not on a company cloud, and you connect AI providers with your own API key."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which AI providers does Kumanga support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Any compatible provider with your own key: Google Gemini, OpenAI-compatible endpoints, or a custom endpoint. You bring the key, so you choose the model and control the cost — Kumanga itself never bills you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is Kumanga different from other AI comic or manga generators?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most AI comics tools generate a finished page and leave you no way to change it. Kumanga generates reusable assets — characters, poses, expressions, backgrounds — and gives you a real non-destructive editor, so you can move a character without regenerating the panel or rewrite one line of dialogue without touching the art."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I keep editing a page after the AI generates it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — everything stays editable. The Manga Agent plans, reuses existing assets and commits a verified, fully editable result. A deterministic verifier checks every actor placement and that dialogue is byte-exact before a run lands; failed runs roll back cleanly."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What file formats can I export?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Today: high-quality PNG at 1x or 2x, straight from the live scene graph, with provenance metadata on every generated asset. PDF, webtoon-strip and print-ready export are on the roadmap, funded by the current campaign."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Kumanga harvest my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kumanga is local-first: projects and images stay on your machine. It is independent and open source — no VC, no ad model, no data harvesting — and the v0.1 codebase ships with 991 passing automated tests, including 98 dedicated security tests."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -334,6 +497,7 @@ footer a:hover{color:var(--text)}
       <a href="#how">How it works</a>
       <a href="#demo">Demo</a>
       <a href="#roadmap">Roadmap</a>
+      <a href="#faq">FAQ</a>
       <a href="https://github.com/BotTony329/mangaharness" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-pink btn-small" href="#support">Back the launch</a>
     </div>
@@ -404,7 +568,7 @@ footer a:hover{color:var(--text)}
     </div>
 
     <figure class="poster">
-      <img src="assets/kumanga-poster.jpg" alt="Kumanga studio poster — the bear mascot behind a laptop running the manga editor, with the feature list: reusable characters, scene and asset library, manga editor, manga agent, export and share" loading="eager" data-path="assets/kumanga-poster.jpg" onerror="kmFb(this)">
+      <img src="assets/kumanga-poster.jpg" alt="Kumanga studio poster — the bear mascot behind a laptop running the manga editor, with the feature list: reusable characters, scene and asset library, manga editor, manga agent, export and share" width="1300" height="731" loading="eager" data-path="assets/kumanga-poster.jpg" onerror="kmFb(this)">
     </figure>
     <p class="poster-caption">The Kumanga studio: project library, manga assets, the page canvas and the Manga Agent — one editor.</p>
   </div>
@@ -541,13 +705,13 @@ footer a:hover{color:var(--text)}
 
     <div class="manga-gallery">
       <a class="manga-page" href="assets/manga-page-1.jpg" target="_blank" rel="noopener">
-        <img src="assets/manga-page-1.jpg" data-path="assets/manga-page-1.jpg" alt="Demo manga page 1 — Kumanga-chan introduces herself as an open-source AI manga harness built by Tony" loading="lazy" onerror="kmFb(this)">
+        <img src="assets/manga-page-1.jpg" data-path="assets/manga-page-1.jpg" alt="Demo manga page 1 — Kumanga-chan introduces herself as an open-source AI manga harness built by Tony" width="1100" height="1649" loading="lazy" onerror="kmFb(this)">
       </a>
       <a class="manga-page" href="assets/manga-page-2.jpg" target="_blank" rel="noopener">
-        <img src="assets/manga-page-2.jpg" data-path="assets/manga-page-2.jpg" alt="Demo manga page 2 — Kumanga-chan and Maku-chan demonstrate the relationship system and local-first BYOK setup" loading="lazy" onerror="kmFb(this)">
+        <img src="assets/manga-page-2.jpg" data-path="assets/manga-page-2.jpg" alt="Demo manga page 2 — Kumanga-chan and Maku-chan demonstrate the relationship system and local-first BYOK setup" width="1100" height="1649" loading="lazy" onerror="kmFb(this)">
       </a>
       <a class="manga-page" href="assets/manga-page-3.jpg" target="_blank" rel="noopener">
-        <img src="assets/manga-page-3.jpg" data-path="assets/manga-page-3.jpg" alt="Demo manga page 3 — Kumanga-chan thanks readers and shows the GoFundMe campaign for launching the AI manga harness" loading="lazy" onerror="kmFb(this)">
+        <img src="assets/manga-page-3.jpg" data-path="assets/manga-page-3.jpg" alt="Demo manga page 3 — Kumanga-chan thanks readers and shows the GoFundMe campaign for launching the AI manga harness" width="1100" height="1650" loading="lazy" onerror="kmFb(this)">
       </a>
     </div>
     <p class="gallery-caption">Same two characters across every panel — poses, expressions and interactions generated as reusable assets, composed by hand.</p>
@@ -612,6 +776,52 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
+<!-- ======================= FAQ ======================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="center">
+      <span class="kicker glow-amber">QUESTIONS, ANSWERED</span>
+      <h2 class="section-title">Frequently asked questions</h2>
+      <p class="section-sub">What people ask before trying an AI manga studio — straight answers, no fine print.</p>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>What is Kumanga?</h3>
+        <p>Kumanga is an open-source, local-first AI manga harness — a complete manga studio that runs in your browser. AI generates reusable assets such as characters, poses and backgrounds, while you direct the story in a non-destructive editor. The creator remains the author: your API keys, your projects, your pages.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Is Kumanga free and open source?</h3>
+        <p>Yes. Kumanga v0.1 is free and open source under the MIT license, and the preview is running today. A GoFundMe fundraiser is live and a Kickstarter campaign is in review to fund the next features — the core studio stays free.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Do I need an account or subscription?</h3>
+        <p>No. Kumanga has zero accounts, sign-ups or lock-in. Projects and images live on your machine, not on a company cloud, and you connect AI providers with your own API key.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Which AI providers does Kumanga support?</h3>
+        <p>Any compatible provider with your own key: Google Gemini, OpenAI-compatible endpoints, or a custom endpoint. You bring the key, so you choose the model and control the cost — Kumanga itself never bills you.</p>
+      </div>
+      <div class="faq-item">
+        <h3>How is Kumanga different from other AI comic or manga generators?</h3>
+        <p>Most AI comics tools generate a finished page and leave you no way to change it. Kumanga generates reusable assets — characters, poses, expressions, backgrounds — and gives you a real non-destructive editor, so you can move a character without regenerating the panel or rewrite one line of dialogue without touching the art.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I keep editing a page after the AI generates it?</h3>
+        <p>Yes — everything stays editable. The Manga Agent plans, reuses existing assets and commits a verified, fully editable result. A deterministic verifier checks every actor placement and that dialogue is byte-exact before a run lands; failed runs roll back cleanly.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What file formats can I export?</h3>
+        <p>Today: high-quality PNG at 1× or 2×, straight from the live scene graph, with provenance metadata on every generated asset. PDF, webtoon-strip and print-ready export are on the roadmap, funded by the current campaign.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Does Kumanga harvest my data?</h3>
+        <p>No. Kumanga is local-first: projects and images stay on your machine. It is independent and open source — no VC, no ad model, no data harvesting — and the v0.1 codebase ships with 991 passing automated tests, including 98 dedicated security tests.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= SUPPORT ======================= -->
 <section class="support" id="support">
   <div class="wrap">
@@ -659,7 +869,7 @@ footer a:hover{color:var(--text)}
       <a href="https://mangaharness.vercel.app" target="_blank" rel="noopener">Live studio</a>
       <a href="https://github.com/BotTony329" target="_blank" rel="noopener">BotTony329</a>
     </div>
-    <div>Created and maintained by <a href="https://github.com/BotTony329" target="_blank" rel="noopener">BotTony329</a>. Kuma (bear) + manga.</div>
+    <div>Created and maintained by <a href="https://github.com/BotTony329" target="_blank" rel="noopener">BotTony329</a>. Kuma (bear) + manga. Last updated August 2026.</div>
   </div>
 </footer>
 

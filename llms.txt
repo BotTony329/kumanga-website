@@ -1,0 +1,30 @@
+# Kumanga
+
+> Kumanga is a free, open-source (MIT), local-first AI manga harness: a studio
+> that runs in the browser where AI generates reusable assets — characters,
+> poses, expressions, backgrounds — and a non-destructive editor composes them
+> into manga pages the creator controls. Bring your own API key (Gemini,
+> OpenAI-compatible, or custom endpoint). No account, no subscription, no data
+> harvesting. v0.1 is live with 991 passing automated tests including 98
+> dedicated security tests. Independent project by BotTony329, funded via
+> GoFundMe with a Kickstarter campaign in review.
+
+Last updated: 2026-08-24
+
+## Website
+
+- [Home / product page](https://kumanga-website.vercel.app/): what Kumanga is, features, how the Manga Agent works, demo videos, sample manga pages, roadmap, FAQ, and how to support the launch.
+
+## Try it
+
+- [Live studio (v0.1 preview)](https://mangaharness.vercel.app): the running application — no account needed.
+
+## Source & demos
+
+- [GitHub repository](https://github.com/BotTony329/mangaharness): MIT-licensed source code for the harness.
+- [Demo: character relation system](https://www.youtube.com/watch?v=t0AOxLiDGxA): interaction poses that respect defined character relationships without character drift.
+- [Demo: all elements are assets](https://www.youtube.com/watch?v=O1h57FN3uns): every element on a page is a reusable, movable, reframable asset.
+
+## Support the launch
+
+- [GoFundMe fundraiser](https://gofund.me/91d807ee1): funds the roadmap — PDF/webtoon/print export, multi-project management, advanced typography, collaboration, mobile support.
