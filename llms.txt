@@ -6,8 +6,9 @@
 > into manga pages the creator controls. Bring your own API key (Gemini,
 > OpenAI-compatible, or custom endpoint). No account, no subscription, no data
 > harvesting. v0.1 is live with 991 passing automated tests including 98
-> dedicated security tests. Independent project by BotTony329, funded via
-> GoFundMe with a Kickstarter campaign in review.
+> dedicated security tests. Independent project by BotTony329, funded via a
+> rewards-based crowdfunding campaign on Pozible (until 29 September 2026)
+> plus GoFundMe donations.
 
 Last updated: 2026-08-24
 
@@ -27,4 +28,5 @@ Last updated: 2026-08-24
 
 ## Support the launch
 
-- [GoFundMe fundraiser](https://gofund.me/91d807ee1): funds the roadmap — PDF/webtoon/print export, multi-project management, advanced typography, collaboration, mobile support.
+- [Pozible campaign](https://www.pozible.com/project/launching-ai-manga-harness-1): rewards-based crowdfunding, all-or-nothing, AU$5,000 goal, live 23 August – 29 September 2026. Funds PDF, webtoon-strip and print-ready export, multi-project management, and collaboration. Reward tiers from AU$10 (README credit) to AU$500 (sponsor).
+- [GoFundMe fundraiser](https://gofund.me/91d807ee1): direct donations toward the same roadmap.

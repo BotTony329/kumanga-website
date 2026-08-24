@@ -4,6 +4,23 @@
 以下是**代码做不了、需要你本人执行**的事项，按优先级排序。对一个独立开源项目来说，
 这些站外动作往往比代码改动更能决定被搜到、被 AI 推荐的程度。
 
+## 融资活动期间（Pozible，2026-09-29 截止）——时效性最高
+
+活动页 `https://www.pozible.com/project/launching-ai-manga-harness-1` 是纯 JS 渲染，
+Google 勉强能索引，但 ChatGPT/Perplexity/Claude 的爬虫完全看不到它。
+官网 support 区块已改为 Pozible 主入口并写明金额、期限、all-or-nothing 规则——
+AI 引擎会从官网读到这些事实。你还需要：
+
+- **对外只用公开 URL**（`/project/launching-ai-manga-harness-1`），
+  绝不用编辑用的 UUID 链接（`/user/project/75300138-...`），避免制造重复入口。
+- **Pozible 后台优化**（详见交付说明）：标题加入 Kumanga 品牌、keywords 字段补词、
+  故事区把所有网址设为可点击超链接并补官网链接、Profile 简介（当前是 "An AI creator"）改为含 Kumanga 的完整介绍。
+- **YouTube 两个演示视频的描述**追加 Pozible 链接（文案已在交付说明里）。
+- 活动前两周在 Reddit（r/manga、r/aiArt、r/SideProject）、Hacker News（Show HN）发布，
+  附公开 URL + 一句"AI 生成可复用素材、创作者保持控制"的钩子。
+- 活动结束后：无论成败，回官网把 support 区块文案更新为结果（成功→交付时间线；失败→GoFundMe 为主），
+  保持事实新鲜度。
+
 ## 本周做一次（合计约 2–3 小时）
 
 ### 1. 注册 Google Search Console + Bing Webmaster Tools（最高优先级）
@@ -12,18 +29,12 @@
 - 这是你能看到"哪些词搜到了你、排名多少、AI/搜索爬虫抓取是否正常"的唯一官方入口。
 - Bing 站长工具同理（[bing.com/webmasters](https://www.bing.com/webmasters)），Bing 还 feeding ChatGPT 的搜索结果。
 
-### 2. 处理旧部署域名（消除重复内容）
-- `kumanga-website-personal-b90d.vercel.app` 和正式域名同时在线提供相同内容。
-  页面已加 canonical 标签指向正式域名，能兜底；但更干净的做法是在 Vercel 项目设置里
-  把旧域名删除，或配置 301 跳转到 `kumanga-website.vercel.app`。
-- og:image 已改为正式域名，此项已修复。
+### 2. ~~处理旧部署域名~~（已完成 2026-08-24）
+- `kumanga-website-personal-b90d.vercel.app` 是 Vercel 自动生成的别名，无法删除；
+  canonical 已化解重复问题。真正重复的 `kumanga` 项目（kumanga-pi.vercel.app）已删除。
 
-### 3. 打磨 GitHub 仓库（AI 引擎 heavily 参考的权威源）
-- `BotTony329/mangaharness` 的 description 目前只有 "a manga harness"。改成含关键词的完整描述，
-  例如：`Kumanga — an open-source, local-first AI manga harness. Reusable characters, non-destructive editor, natural-language Manga Agent. BYOK, no account.`
-- 添加 Topics：`ai-manga` `manga-creator` `comic-generator` `local-first` `byok` `open-source` `webtoon` `ai-agent`。
-- 在仓库 About 里填 Website 链接指向 `https://kumanga-website.vercel.app/`，README 顶部也加上。
-- 官网页脚已链接仓库，形成双向权威闭环。
+### 3. ~~打磨 GitHub 仓库~~（已完成 2026-08-24）
+- 描述、Topics（9 个）、Website 链接、README 顶部官网入口均已上线。
 
 ### 4. 优化两个 YouTube 演示视频的标题和描述
 - 标题带关键词（如 "Kumanga Demo — Reusable Character Relations (Open-Source AI Manga Studio)"）。
