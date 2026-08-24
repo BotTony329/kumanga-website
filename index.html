@@ -59,7 +59,10 @@ body{
 }
 ::selection{background:rgba(255,62,200,.35)}
 a{color:inherit}
-img{max-width:100%;display:block}
+/* width/height attrs reserve aspect-ratio space against layout shift, but
+   without height:auto the attribute height wins over the CSS width and the
+   image renders stretched. */
+img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 h1,h2,h3{font-family:var(--font-head);line-height:1.12}
 .glow-pink{color:var(--pink);text-shadow:0 0 6px rgba(255,62,200,.85),0 0 22px rgba(255,62,200,.55),0 0 60px rgba(255,62,200,.35)}
